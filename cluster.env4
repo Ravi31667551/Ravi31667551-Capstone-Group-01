@@ -1,0 +1,46 @@
+# Group 01 — 3-node Group Replication + Router (copy to cluster.env on EACH MySQL node)
+# Primary / bootstrap: Ravi (NODE1). Secondaries: Rishu (NODE2), Bhavna (NODE3).
+# Adjust passwords and paths before use. Generate GR_GROUP_NAME with: uuidgen
+
+# ---------- Topology (ZeroTier IPs — edit if yours differ) ----------
+MYSQL_NODE1_IP=10.67.151.166
+MYSQL_NODE1_HOST=rabbit2
+MYSQL_NODE1_USER=ravi
+
+MYSQL_NODE2_IP=10.67.151.212
+MYSQL_NODE2_HOST=rishu-fe
+MYSQL_NODE2_USER=vboxuser
+
+MYSQL_NODE3_IP=10.67.151.114
+MYSQL_NODE3_HOST=bhavna-rmq
+MYSQL_NODE3_USER=bhavnasahai3
+
+# ---------- Core MySQL ----------
+MYSQL_PORT=3306
+MYSQL_X_PORT=33060
+MYSQL_ROOT_PASSWORD=It490Db@123
+MYSQL_APP_DB=capstone_db
+MYSQL_APP_USER=it490
+MYSQL_APP_PASSWORD=It490Db@123
+
+# ---------- Group Replication (single-primary; you = primary at bootstrap) ----------
+# Must be a valid UUID string (run: uuidgen)
+GR_GROUP_NAME=aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
+GR_LOCAL_ADDRESS_PORT=33061
+GR_SEEDS=10.67.151.166:33061,10.67.151.212:33061,10.67.151.114:33061
+GR_IP_ALLOWLIST=10.67.151.0/24
+GR_SINGLE_PRIMARY_MODE=ON
+GR_BOOTSTRAP_NODE=10.67.151.166
+GR_RECOVERY_USER=repl_user
+GR_RECOVERY_PASSWORD=It490Db@123
+
+# ---------- Router (installed on NODE1 / Ravi after cluster is up) ----------
+ROUTER_BIND_ADDRESS=0.0.0.0
+ROUTER_RW_PORT=6446
+ROUTER_RO_PORT=6447
+ROUTER_INSTALL_NODE=10.67.151.166
+
+# ---------- Backend on Ravi (edit if your clone path differs) ----------
+BACKEND_REPO_PATH=/home/ravi/Desktop/Capstone-Group-01
+BACKEND_ENV_FILE=/home/ravi/Desktop/Capstone-Group-01/.env
+BACKEND_SYSTEMD_UNIT=jobtracker-backend.service

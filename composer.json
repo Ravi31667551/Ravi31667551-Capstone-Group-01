@@ -1,0 +1,8 @@
+{
+    "require": {
+        "php-amqplib/php-amqplib": "^3.7"
+    },
+    "scripts": {
+        "install-php-deps": "bash scripts/install-php-deps.sh"
+    }
+}

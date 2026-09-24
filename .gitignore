@@ -1,0 +1,23 @@
+# local secrets (never commit)
+.env
+.env.*.local
+
+# integrator / local log output
+logs/
+
+# local python venv (never commit virtualenvs)
+venv/
+backend/venv/
+
+# local installers
+*.deb
+composer.phar
+composer-setup.php
+
+
+# python cache
+__pycache__/
+*.pyc
+
+jobtrackr_threat_monitor.log
+jobtrackr_threat_monitor.log
